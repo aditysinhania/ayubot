@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f7f9;
+}
+
+/* Floating Chat Button */
+#chat-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 25px;
+    background: linear-gradient(135deg, #00b09b, #3cd3ad);
+    color: white;
+    font-size: 22px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+#chat-toggle:hover { transform: scale(1.1); }
+
+/* Floating text beside button */
+#assist-text {
+    position: fixed;
+    bottom: 35px;
+    right: 90px;
+    background: #ffffff;
+    border: 1px solid #3cd3ad;
+    border-radius: 25px;
+    padding: 8px 15px;
+    font-size: 14px;
+    color: #0a513d;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    font-weight: 500;
+    z-index: 1000;
+}
+
+/* Chatbox */
+#chatbox {
+    width: 320px;
+    height: 450px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    background: #fff;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    z-index: 999;
+}
+#chatbox.open {
+    display: flex;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Chat Header */
+#chat-header {
+    background: linear-gradient(135deg, #00b09b, #3cd3ad);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Messages Section */
+#messages {
+    flex: 1;
+    padding: 15px;
+    background: #f4f7f9;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Message Bubbles */
+.message {
+    max-width: 80%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    animation: fadeIn 0.3s ease;
+    word-wrap: break-word;
+}
+.bot { background-color: #e1f5e1; align-self: flex-start; color: #333; }
+.user { background-color: #00b09b; color: white; align-self: flex-end; }
+
+/* FAQ Buttons */
+.faq-btn {
+    margin: 5px 5px 0 0;
+    padding: 5px 10px;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Input area */
+#input { display: flex; border-top: 1px solid #ddd; }
+#input input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+#input button {
+    padding: 12px 20px;
+    border: none;
+    background-color: #00b09b;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+#input button:hover { background-color: #03a678; }
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
