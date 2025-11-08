@@ -20,7 +20,7 @@ document.getElementById("chat-toggle").addEventListener("click", () => {
   chat.classList.toggle("open");
 });
 
-// Add message to chat
+// Add message
 function addMessage(msg, sender) {
   const messages = document.getElementById("messages");
   const div = document.createElement("div");
@@ -30,7 +30,7 @@ function addMessage(msg, sender) {
   messages.scrollTop = messages.scrollHeight;
 }
 
-// Add quick buttons below chat
+// Add quick buttons
 function addQuickButtons() {
   const messages = document.getElementById("messages");
   messages.querySelectorAll(".quick-btn").forEach((btn) => btn.remove());
@@ -50,31 +50,31 @@ function addQuickButtons() {
   });
 }
 
-// Determine the bot’s response
+// Smart response generator
 function getResponse(input) {
   const q = String(input).toLowerCase().trim();
 
-  // Greetings
+  // ✅ Greetings
   const greetings = ["hi", "hello", "hey", "namaste", "good morning", "good evening"];
   if (greetings.some((word) => q.includes(word))) {
     awaitingFeeling = true;
     return "Namaskar! 🌿 How are you feeling today?";
   }
 
-  // Feelings
+  // ✅ Feelings
   const feelings = ["good", "fine", "okay", "not good", "bad", "better", "tired", "happy", "sad"];
   if (awaitingFeeling && feelings.some((word) => q.includes(word))) {
     awaitingFeeling = false;
     return "I'm glad to hear that 🌿. How can I assist you today?";
   }
 
-  // Farewells
+  // ✅ Farewells
   const farewells = ["bye", "goodbye", "see you", "tata"];
   if (farewells.some((word) => q.includes(word))) {
     return "Goodbye! 🌿 Stay healthy and take care.";
   }
 
-  // Timings
+  // ✅ Timings
   if (q.includes("timing") || q.includes("hours")) {
     let timings = "";
     if (data.doctors) {
@@ -86,7 +86,7 @@ function getResponse(input) {
     return timings.trim();
   }
 
-  // Appointment
+  // ✅ Appointment
   if (q.includes("appointment") || q.includes("book")) {
     return (
       data.general?.appointment ||
@@ -94,7 +94,7 @@ function getResponse(input) {
     );
   }
 
-  // Medicines
+  // ✅ Medicines
   if (q.includes("medicine") || q.includes("herb")) {
     if (data.medicines) {
       return Object.keys(data.medicines)
@@ -104,11 +104,46 @@ function getResponse(input) {
     return "We offer Ayurvedic medicines like Ashwagandha, Triphala, Brahmi, and Chyawanprash.";
   }
 
-  // Default fallback
-  return "Sorry, I didn’t quite get that. 🌿 Try asking about timings, appointment, or medicines.";
+  // ✅ Search dynamically across all vedic_data.json categories
+  const searchResult = searchInData(q);
+  if (searchResult) return searchResult;
+
+  // ❌ Default fallback
+  return "Sorry, I didn’t quite get that. 🌿 Try asking about dosha, therapy, routine, safety, or medicines.";
 }
 
-// Handle user messages
+// Deep search through all JSON data
+function searchInData(query) {
+  if (!data || typeof data !== "object") return null;
+
+  query = query.toLowerCase();
+  let results = [];
+
+  function searchObj(obj) {
+    for (const key in obj) {
+      if (!obj.hasOwnProperty(key)) continue;
+      const value = obj[key];
+
+      if (typeof value === "string") {
+        if (key.toLowerCase().includes(query) || value.toLowerCase().includes(query)) {
+          results.push(`${capitalizeFirstLetter(key)}: ${value}`);
+        }
+      } else if (typeof value === "object") {
+        searchObj(value);
+      }
+    }
+  }
+
+  searchObj(data);
+  return results.length ? results.join("\n\n") : null;
+}
+
+// Capitalize helper
+function capitalizeFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// Handle user input
 function handleUserInput(input) {
   if (!input) return;
   addMessage(input, "user");
@@ -117,19 +152,17 @@ function handleUserInput(input) {
   addQuickButtons();
 }
 
-// Send message button
+// Send message
 document.getElementById("sendBtn").addEventListener("click", () => {
   const input = document.getElementById("userInput").value.trim();
   if (input) handleUserInput(input);
   document.getElementById("userInput").value = "";
 });
 
-// Press Enter to send
-document
-  .getElementById("userInput")
-  .addEventListener("keypress", (e) => {
-    if (e.key === "Enter") document.getElementById("sendBtn").click();
-  });
+// Enter key event
+document.getElementById("userInput").addEventListener("keypress", (e) => {
+  if (e.key === "Enter") document.getElementById("sendBtn").click();
+});
 
 // Start chatbot
 loadData();
