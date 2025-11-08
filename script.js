@@ -20,7 +20,7 @@ document.getElementById("chat-toggle").addEventListener("click", () => {
   chat.classList.toggle("open");
 });
 
-// Add message
+// Add message to chat
 function addMessage(msg, sender) {
   const messages = document.getElementById("messages");
   const div = document.createElement("div");
@@ -30,7 +30,7 @@ function addMessage(msg, sender) {
   messages.scrollTop = messages.scrollHeight;
 }
 
-// Add quick buttons
+// Add quick buttons below chat
 function addQuickButtons() {
   const messages = document.getElementById("messages");
   messages.querySelectorAll(".quick-btn").forEach((btn) => btn.remove());
@@ -50,31 +50,31 @@ function addQuickButtons() {
   });
 }
 
-// Get bot response
+// Determine the bot’s response
 function getResponse(input) {
   const q = String(input).toLowerCase().trim();
 
-  // ✅ Greetings
+  // Greetings
   const greetings = ["hi", "hello", "hey", "namaste", "good morning", "good evening"];
-  if (greetings.includes(q)) {
+  if (greetings.some((word) => q.includes(word))) {
     awaitingFeeling = true;
     return "Namaskar! 🌿 How are you feeling today?";
   }
 
-  // ✅ Feelings
-  const feelingReplies = ["good", "fine", "okay", "not good", "bad", "better", "tired", "happy", "sad"];
-  if (awaitingFeeling && feelingReplies.includes(q)) {
+  // Feelings
+  const feelings = ["good", "fine", "okay", "not good", "bad", "better", "tired", "happy", "sad"];
+  if (awaitingFeeling && feelings.some((word) => q.includes(word))) {
     awaitingFeeling = false;
     return "I'm glad to hear that 🌿. How can I assist you today?";
   }
 
-  // ✅ Farewells
+  // Farewells
   const farewells = ["bye", "goodbye", "see you", "tata"];
-  if (farewells.includes(q)) {
+  if (farewells.some((word) => q.includes(word))) {
     return "Goodbye! 🌿 Stay healthy and take care.";
   }
 
-  // ✅ Timings
+  // Timings
   if (q.includes("timing") || q.includes("hours")) {
     let timings = "";
     if (data.doctors) {
@@ -86,7 +86,7 @@ function getResponse(input) {
     return timings.trim();
   }
 
-  // ✅ Appointment
+  // Appointment
   if (q.includes("appointment") || q.includes("book")) {
     return (
       data.general?.appointment ||
@@ -94,7 +94,7 @@ function getResponse(input) {
     );
   }
 
-  // ✅ Medicines
+  // Medicines
   if (q.includes("medicine") || q.includes("herb")) {
     if (data.medicines) {
       return Object.keys(data.medicines)
@@ -104,11 +104,11 @@ function getResponse(input) {
     return "We offer Ayurvedic medicines like Ashwagandha, Triphala, Brahmi, and Chyawanprash.";
   }
 
-  // ❌ Default fallback
+  // Default fallback
   return "Sorry, I didn’t quite get that. 🌿 Try asking about timings, appointment, or medicines.";
 }
 
-// Handle user input
+// Handle user messages
 function handleUserInput(input) {
   if (!input) return;
   addMessage(input, "user");
@@ -117,17 +117,19 @@ function handleUserInput(input) {
   addQuickButtons();
 }
 
-// Send button
+// Send message button
 document.getElementById("sendBtn").addEventListener("click", () => {
   const input = document.getElementById("userInput").value.trim();
   if (input) handleUserInput(input);
   document.getElementById("userInput").value = "";
 });
 
-// Enter key
+// Press Enter to send
 document
   .getElementById("userInput")
-  .addEventListener("keypress", (e) => e.key === "Enter" && document.getElementById("sendBtn").click());
+  .addEventListener("keypress", (e) => {
+    if (e.key === "Enter") document.getElementById("sendBtn").click();
+  });
 
-// Initialize
+// Start chatbot
 loadData();
