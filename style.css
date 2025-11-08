@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background: #f4f7f9;
+    background: transparent; /* no background color */
 }
 
 /* Floating Chat Button */
@@ -30,7 +30,7 @@ body {
     position: fixed;
     bottom: 35px;
     right: 90px;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.6); /* semi-transparent */
     border: 1px solid #3cd3ad;
     border-radius: 25px;
     padding: 8px 15px;
@@ -46,15 +46,15 @@ body {
     width: 320px;
     height: 450px;
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     position: fixed;
     bottom: 90px;
     right: 25px;
-    background: #fff;
+    background: transparent; /* ✅ transparent */
     display: none;
     flex-direction: column;
     overflow: hidden;
-    border: 1px solid #ddd;
+    border: none; /* ✅ no border */
     z-index: 999;
 }
 #chatbox.open {
@@ -76,7 +76,7 @@ body {
 #messages {
     flex: 1;
     padding: 15px;
-    background: #f4f7f9;
+    background: transparent; /* ✅ transparent background */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -91,8 +91,16 @@ body {
     animation: fadeIn 0.3s ease;
     word-wrap: break-word;
 }
-.bot { background-color: #e1f5e1; align-self: flex-start; color: #333; }
-.user { background-color: #00b09b; color: white; align-self: flex-end; }
+.bot { 
+    background-color: rgba(225, 245, 225, 0.9); /* slightly transparent green */
+    align-self: flex-start; 
+    color: #333; 
+}
+.user { 
+    background-color: rgba(0, 176, 155, 0.9); /* slightly transparent teal */
+    color: white; 
+    align-self: flex-end; 
+}
 
 /* FAQ Buttons */
 .faq-btn {
@@ -106,13 +114,15 @@ body {
 }
 
 /* Input area */
-#input { display: flex; border-top: 1px solid #ddd; }
+#input { display: flex; border-top: 1px solid rgba(255, 255, 255, 0.3); }
 #input input {
     flex: 1;
     padding: 12px;
     border: none;
     outline: none;
     font-size: 14px;
+    background: rgba(255, 255, 255, 0.5); /* slight blur effect */
+    color: #333;
 }
 #input button {
     padding: 12px 20px;
@@ -125,4 +135,7 @@ body {
 #input button:hover { background-color: #03a678; }
 
 /* Animations */
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
