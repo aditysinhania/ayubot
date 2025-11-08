@@ -21,11 +21,6 @@ function startChat() {
     document.getElementById('sendBtn').disabled = false;
 }
 
-// Toggle Chat Open/Close
-document.getElementById('chat-toggle').addEventListener('click', () => {
-    const chat = document.getElementById('chatbox');
-    chat.classList.toggle('open');
-
     // When opened for the first time, load data and greet
     if (chat.classList.contains('open') && !chat.dataset.started) {
         loadData();
@@ -171,3 +166,4 @@ document.getElementById('userInput').addEventListener('keypress', e => {
 // Disable input until chat is opened
 document.getElementById('userInput').disabled = true;
 document.getElementById('sendBtn').disabled = true;
+
