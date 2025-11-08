@@ -1,33 +1,54 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: transparent;
 }
 
-/* Chatbox fills iframe */
-#chatbox {
-  width: 100%;
-  height: 100%;
-  max-width: 400px;
-  max-height: 550px;
-  border-radius: 15px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+/* Floating Chat Button */
+#chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 25px;
+  background: linear-gradient(135deg, #00b09b, #3cd3ad);
+  color: white;
+  font-size: 22px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+#chat-toggle:hover { transform: scale(1.1); }
+
+/* Chatbox */
+#chatbox {
+  width: 340px;
+  height: 500px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  position: fixed;
+  bottom: 90px;
+  right: 25px;
+  background: #ffffff; /* solid white */
+  border: none;
+  display: none; /* hidden by default */
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+}
+#chatbox.open {
+  display: flex;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Chat header */
+/* Chat Header */
 #chat-header {
-  background: rgba(0, 176, 155, 0.8);
+  background: linear-gradient(135deg, #00b09b, #3cd3ad);
   color: white;
   padding: 15px;
   text-align: center;
@@ -35,18 +56,18 @@ body {
   font-weight: bold;
 }
 
-/* Message area */
+/* Messages Section */
 #messages {
   flex: 1;
   padding: 15px;
-  background: transparent;
+  background: #f4f7f9;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* Messages */
+/* Message Bubbles */
 .message {
   max-width: 80%;
   padding: 10px 15px;
@@ -54,24 +75,25 @@ body {
   animation: fadeIn 0.3s ease;
   word-wrap: break-word;
 }
-.bot {
-  background-color: rgba(225, 245, 225, 0.9);
-  align-self: flex-start;
-  color: #333;
-}
-.user {
-  background-color: rgba(0, 176, 155, 0.9);
+.bot { background-color: #e1f5e1; align-self: flex-start; color: #333; }
+.user { background-color: #00b09b; color: white; align-self: flex-end; }
+
+/* FAQ Buttons */
+.faq-btn {
+  margin: 5px 5px 0 0;
+  padding: 5px 10px;
+  border: none;
+  background-color: #4caf50;
   color: white;
-  align-self: flex-end;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 /* Input area */
 #input {
   display: flex;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid #ddd;
+  background: #ffffff;
 }
 #input input {
   flex: 1;
@@ -79,8 +101,6 @@ body {
   border: none;
   outline: none;
   font-size: 14px;
-  background: transparent;
-  color: #333;
 }
 #input button {
   padding: 12px 20px;
@@ -92,7 +112,7 @@ body {
 }
 #input button:hover { background-color: #03a678; }
 
-/* Animation */
+/* Animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
