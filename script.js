@@ -4,7 +4,7 @@ let awaitingFeeling = false;
 // Load JSON data
 async function loadData() {
   try {
-    const response = await fetch("vedic_data.json");
+    const response = await fetch("https://raw.githubusercontent.com/aditysinhania/ayubot/refs/heads/main/vedic_data.json");
     data = await response.json();
   } catch (e) {
     console.error("Failed to load vedic_data.json", e);
@@ -166,3 +166,4 @@ document.getElementById("userInput").addEventListener("keypress", (e) => {
 
 // Start chatbot
 loadData();
+
