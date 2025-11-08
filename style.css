@@ -1,76 +1,33 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background: transparent;
-}
-
-/* Floating Chat Button */
-#chat-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 25px;
-  background: linear-gradient(135deg, #00b09b, #3cd3ad);
-  color: white;
-  font-size: 22px;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  z-index: 1000;
-  transition: transform 0.3s ease;
-}
-#chat-toggle:hover { transform: scale(1.1); }
-
-/* Floating assist text */
-#assist-text {
-  position: fixed;
-  bottom: 35px;
-  right: 90px;
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 25px;
-  padding: 8px 15px;
-  font-size: 14px;
-  color: #0a513d;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-  font-weight: 500;
-  z-index: 1000;
+  background: transparent;
 }
 
-/* Chatbox */
+/* Chatbox fills iframe */
 #chatbox {
-  width: 320px;
-  height: 450px;
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  max-height: 550px;
   border-radius: 15px;
-  position: fixed;
-  bottom: 90px;
-  right: 25px;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  display: none;
+  display: flex;
   flex-direction: column;
   overflow: hidden;
-  z-index: 999;
-}
-#chatbox.open {
-  display: flex;
-  animation: fadeIn 0.3s ease-in-out;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* Chat Header */
+/* Chat header */
 #chat-header {
   background: rgba(0, 176, 155, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   color: white;
   padding: 15px;
   text-align: center;
@@ -78,7 +35,7 @@ body {
   font-weight: bold;
 }
 
-/* Messages */
+/* Message area */
 #messages {
   flex: 1;
   padding: 15px;
@@ -89,7 +46,7 @@ body {
   gap: 10px;
 }
 
-/* Bubbles */
+/* Messages */
 .message {
   max-width: 80%;
   padding: 10px 15px;
@@ -108,18 +65,7 @@ body {
   align-self: flex-end;
 }
 
-/* FAQ Buttons */
-.faq-btn {
-  margin: 5px 5px 0 0;
-  padding: 5px 10px;
-  border: none;
-  background-color: #4caf50;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* Input */
+/* Input area */
 #input {
   display: flex;
   background: rgba(255, 255, 255, 0.15);
@@ -144,9 +90,7 @@ body {
   cursor: pointer;
   transition: background-color 0.2s;
 }
-#input button:hover {
-  background-color: #03a678;
-}
+#input button:hover { background-color: #03a678; }
 
 /* Animation */
 @keyframes fadeIn {
