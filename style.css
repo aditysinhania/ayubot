@@ -32,25 +32,26 @@ body {
 #chatbox {
   width: 100%;
   height: 100%;
-  max-width: 400px;
-  max-height: 600px;
+  max-width: none;
+  max-height: none;
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  background: #ffffff;
+  background: #ffffff; /* solid white */
   border: none;
   display: none;
   flex-direction: column;
   overflow: hidden;
   z-index: 999;
+  position: relative; /* ✅ changed from fixed */
+  margin: 0 auto;     /* ✅ centers it naturally inside iframe */
 }
+
 
 #chatbox.open {
   display: flex;
   animation: slideUp 0.3s ease-in-out;
 }
+
 
 /* Chat Header */
 #chat-header {
@@ -141,3 +142,4 @@ body {
     font-size: 20px;
   }
 }
+
