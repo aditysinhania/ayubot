@@ -25,7 +25,7 @@ body {
 }
 #chat-toggle:hover { transform: scale(1.1); }
 
-/* Floating text beside button */
+/* Floating assist text */
 #assist-text {
   position: fixed;
   bottom: 35px;
@@ -48,7 +48,6 @@ body {
   width: 320px;
   height: 450px;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   position: fixed;
   bottom: 90px;
   right: 25px;
@@ -56,6 +55,7 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   display: none;
   flex-direction: column;
   overflow: hidden;
@@ -78,7 +78,7 @@ body {
   font-weight: bold;
 }
 
-/* Messages Section */
+/* Messages */
 #messages {
   flex: 1;
   padding: 15px;
@@ -89,7 +89,7 @@ body {
   gap: 10px;
 }
 
-/* Message Bubbles */
+/* Bubbles */
 .message {
   max-width: 80%;
   padding: 10px 15px;
@@ -119,7 +119,7 @@ body {
   cursor: pointer;
 }
 
-/* Input area */
+/* Input */
 #input {
   display: flex;
   background: rgba(255, 255, 255, 0.15);
@@ -144,9 +144,11 @@ body {
   cursor: pointer;
   transition: background-color 0.2s;
 }
-#input button:hover { background-color: #03a678; }
+#input button:hover {
+  background-color: #03a678;
+}
 
-/* Animations */
+/* Animation */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
