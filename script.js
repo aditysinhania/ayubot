@@ -24,12 +24,6 @@ function startChat() {
     document.getElementById('sendBtn').disabled = false;
 }
 
-// Toggle button
-document.getElementById('chat-toggle').addEventListener('click', () => {
-    const chat = document.getElementById('chatbox');
-    chat.classList.toggle('open');
-});
-
 // Add message
 function addMessage(msg, sender) {
     const messages = document.getElementById('messages');
@@ -170,3 +164,4 @@ document.getElementById('sendBtn').disabled = true;
 
 // Load data and start
 loadData();
+
