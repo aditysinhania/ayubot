@@ -1,13 +1,21 @@
+/* 🌿 Global Reset */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   background: transparent;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
-/* Floating Chat Button */
+html, body {
+  background: transparent !important;
+}
+
+/* 💬 Floating Chat Button */
 #chat-toggle {
   position: fixed;
-  bottom: 20px;
+  bottom: 15px; /* slightly lower button */
   right: 25px;
   background: linear-gradient(135deg, #00b09b, #3cd3ad);
   color: white;
@@ -23,30 +31,33 @@ body {
   z-index: 1000;
   transition: transform 0.3s ease;
 }
-#chat-toggle:hover { transform: scale(1.1); }
+#chat-toggle:hover {
+  transform: scale(1.1);
+}
 
-/* Chatbox */
+/* 🧾 Chatbox Window */
 #chatbox {
-  width: 340px;
-  height: 500px;
+  width: 360px;
+  height: 480px;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  position: fixed;
-  bottom: 90px;
-  right: 25px;
-  background: #ffffff; /* solid white */
-  border: none;
-  display: none; /* hidden by default */
+  background: #ffffff; /* solid white – no transparency */
+  border: none !important;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  display: none;
   flex-direction: column;
   overflow: hidden;
   z-index: 999;
-}
-#chatbox.open {
-  display: flex;
-  animation: fadeIn 0.3s ease-in-out;
+  position: fixed;
+  bottom: 75px; /* reduced gap above button */
+  right: 25px;
 }
 
-/* Chat Header */
+#chatbox.open {
+  display: flex;
+  animation: slideUp 0.35s ease-in-out;
+}
+
+/* 🌈 Header */
 #chat-header {
   background: linear-gradient(135deg, #00b09b, #3cd3ad);
   color: white;
@@ -56,7 +67,7 @@ body {
   font-weight: bold;
 }
 
-/* Messages Section */
+/* 💬 Messages Section */
 #messages {
   flex: 1;
   padding: 15px;
@@ -67,7 +78,7 @@ body {
   gap: 10px;
 }
 
-/* Message Bubbles */
+/* 🗨️ Message Bubbles */
 .message {
   max-width: 80%;
   padding: 10px 15px;
@@ -75,26 +86,41 @@ body {
   animation: fadeIn 0.3s ease;
   word-wrap: break-word;
 }
-.bot { background-color: #e1f5e1; align-self: flex-start; color: #333; }
-.user { background-color: #00b09b; color: white; align-self: flex-end; }
 
-/* FAQ Buttons */
+.bot {
+  background-color: #e1f5e1;
+  align-self: flex-start;
+  color: #333;
+}
+
+.user {
+  background-color: #00b09b;
+  color: white;
+  align-self: flex-end;
+}
+
+/* 🌿 FAQ Buttons */
 .faq-btn {
   margin: 5px 5px 0 0;
-  padding: 5px 10px;
+  padding: 7px 10px;
   border: none;
   background-color: #4caf50;
   color: white;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: 600;
+}
+.faq-btn:hover {
+  background-color: #43a047;
 }
 
-/* Input area */
+/* 📝 Input Area */
 #input {
   display: flex;
   border-top: 1px solid #ddd;
   background: #ffffff;
 }
+
 #input input {
   flex: 1;
   padding: 12px;
@@ -102,6 +128,7 @@ body {
   outline: none;
   font-size: 14px;
 }
+
 #input button {
   padding: 12px 20px;
   border: none;
@@ -109,11 +136,49 @@ body {
   color: white;
   cursor: pointer;
   transition: background-color 0.2s;
+  border-radius: 0 0 15px 0;
 }
-#input button:hover { background-color: #03a678; }
+#input button:hover {
+  background-color: #03a678;
+}
 
-/* Animations */
+/* ✨ Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsive (Mobile View) */
+@media screen and (max-width: 600px) {
+  #chatbox {
+    width: 90vw;
+    height: 70vh;
+    bottom: 70px;
+    right: 10px;
+  }
+
+  #chat-toggle {
+    width: 50px;
+    height: 50px;
+    bottom: 10px;
+    right: 15px;
+    font-size: 20px;
+  }
 }
