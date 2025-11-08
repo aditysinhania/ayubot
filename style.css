@@ -30,20 +30,19 @@ body {
 
 /* Chatbox */
 #chatbox {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  max-height: none;
+  width: 360px;
+  height: 480px;
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  background: #ffffff; /* solid white */
+  background: #ffffff;
   border: none;
   display: none;
   flex-direction: column;
   overflow: hidden;
   z-index: 999;
-  position: relative; /* ✅ changed from fixed */
-  margin: 0 auto;     /* ✅ centers it naturally inside iframe */
+  position: fixed;           /* ✅ directly above the button */
+  bottom: 85px;              /* ✅ perfect spacing */
+  right: 30px;
 }
 
 
@@ -142,4 +141,18 @@ body {
     font-size: 20px;
   }
 }
+html, body {
+  background: transparent !important;
+}
+
+#chatbox {
+  background: rgba(255, 255, 255, 0.95); /* slightly soft white */
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#chatbox.open {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* soft floating look */
+}
+
 
