@@ -30,8 +30,10 @@ body {
   position: fixed;
   bottom: 35px;
   right: 90px;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid #3cd3ad;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 25px;
   padding: 8px 15px;
   font-size: 14px;
@@ -46,14 +48,17 @@ body {
   width: 320px;
   height: 450px;
   border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   position: fixed;
   bottom: 90px;
   right: 25px;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   display: none;
   flex-direction: column;
   overflow: hidden;
-  border: none;
   z-index: 999;
 }
 #chatbox.open {
@@ -63,14 +68,14 @@ body {
 
 /* Chat Header */
 #chat-header {
-  background: linear-gradient(135deg, #00b09b, #3cd3ad);
+  background: rgba(0, 176, 155, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: white;
-  padding: 12px;
+  padding: 15px;
   text-align: center;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
 }
 
 /* Messages Section */
@@ -117,7 +122,9 @@ body {
 /* Input area */
 #input {
   display: flex;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 #input input {
@@ -126,9 +133,8 @@ body {
   border: none;
   outline: none;
   font-size: 14px;
-  background: rgba(255, 255, 255, 0.3);
+  background: transparent;
   color: #333;
-  border-bottom-left-radius: 10px;
 }
 #input button {
   padding: 12px 20px;
@@ -136,21 +142,12 @@ body {
   background-color: #00b09b;
   color: white;
   cursor: pointer;
-  border-bottom-right-radius: 10px;
   transition: background-color 0.2s;
 }
-#input button:hover {
-  background-color: #03a678;
-}
+#input button:hover { background-color: #03a678; }
 
 /* Animations */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
