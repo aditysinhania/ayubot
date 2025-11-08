@@ -54,17 +54,39 @@ function addQuickButtons() {
 function getResponse(input) {
   const q = String(input).toLowerCase().trim();
 
-  if (q.includes("timing")) {
+  // ✅ Greetings
+  const greetings = ["hi", "hello", "hey", "namaste", "good morning", "good evening"];
+  if (greetings.includes(q)) {
+    awaitingFeeling = true;
+    return "Namaskar! 🌿 How are you feeling today?";
+  }
+
+  // ✅ Feelings
+  const feelingReplies = ["good", "fine", "okay", "not good", "bad", "better", "tired", "happy", "sad"];
+  if (awaitingFeeling && feelingReplies.includes(q)) {
+    awaitingFeeling = false;
+    return "I'm glad to hear that 🌿. How can I assist you today?";
+  }
+
+  // ✅ Farewells
+  const farewells = ["bye", "goodbye", "see you", "tata"];
+  if (farewells.includes(q)) {
+    return "Goodbye! 🌿 Stay healthy and take care.";
+  }
+
+  // ✅ Timings
+  if (q.includes("timing") || q.includes("hours")) {
     let timings = "";
     if (data.doctors) {
       for (const key in data.doctors) {
         const doc = data.doctors[key];
         timings += `${doc.name} — ${doc.timing}\n\n`;
       }
-    } else timings = "Our doctors are available Mon–Sat, 9 AM–7 PM.";
+    } else timings = "Our doctors are available Monday–Saturday, 9 AM–7 PM.";
     return timings.trim();
   }
 
+  // ✅ Appointment
   if (q.includes("appointment") || q.includes("book")) {
     return (
       data.general?.appointment ||
@@ -72,6 +94,7 @@ function getResponse(input) {
     );
   }
 
+  // ✅ Medicines
   if (q.includes("medicine") || q.includes("herb")) {
     if (data.medicines) {
       return Object.keys(data.medicines)
@@ -81,6 +104,7 @@ function getResponse(input) {
     return "We offer Ayurvedic medicines like Ashwagandha, Triphala, Brahmi, and Chyawanprash.";
   }
 
+  // ❌ Default fallback
   return "Sorry, I didn’t quite get that. 🌿 Try asking about timings, appointment, or medicines.";
 }
 
