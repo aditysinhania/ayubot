@@ -2,27 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AyuBot Chatbot</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    html, body {
-      background: transparent !important;
-      margin: 0;
-      height: 100%;
-    }
-  </style>
 </head>
 <body>
-
   <!-- Floating Chat Button -->
-  <div id="chat-toggle" title="Chat with AyuBot">💬</div>
+  <div id="chat-toggle">💬</div>
 
-  <!-- Chatbox (initially hidden) -->
+  <!-- Chatbot Box -->
   <div id="chatbox">
     <div id="chat-header">AyuBot - Ayurvedic Assistant</div>
     <div id="messages">
-      <div class="message bot">Namaskar! 🌿 I'm AyuBot, your Ayurvedic assistant. How can I help you today?</div>
+      <div class="message bot">
+        Namaskar! 🌿 I'm AyuBot, your Ayurvedic assistant. How can I help you today?
+      </div>
     </div>
     <div id="input">
       <input type="text" id="userInput" placeholder="Type your message..." disabled />
