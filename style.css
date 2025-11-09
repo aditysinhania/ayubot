@@ -1,4 +1,3 @@
-/* General Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -76,7 +75,7 @@ body {
   font-weight: bold;
 }
 
-/* Messages Container */
+/* Messages */
 #messages {
   flex: 1;
   padding: 15px;
@@ -106,7 +105,7 @@ body {
   align-self: flex-end;
 }
 
-/* Input area */
+/* Input */
 #input {
   display: flex;
   border-top: 1px solid #ddd;
@@ -130,7 +129,7 @@ body {
   background-color: #03a678;
 }
 
-/* Fixed Main Buttons (Timings, Appointment, Doctors) */
+/* Main Buttons (Timings, Appointment, Doctors) */
 #main-buttons-container {
   display: flex;
   flex-wrap: wrap;
@@ -152,7 +151,7 @@ body {
   background-color: #03a678;
 }
 
-/* Scrollbar customization */
+/* Scrollbar */
 #messages::-webkit-scrollbar {
   width: 6px;
 }
@@ -163,17 +162,11 @@ body {
 
 /* Animations */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Mobile Responsiveness */
+/* Mobile */
 @media (max-width: 600px) {
   #chatbox {
     width: 90vw;
@@ -190,9 +183,5 @@ body {
     font-size: 12px;
     bottom: 20px;
     right: 70px;
-  }
-  #main-buttons-container {
-    flex-wrap: wrap;
-    justify-content: center;
   }
 }
