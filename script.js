@@ -1,7 +1,7 @@
 let data = {};
 let awaitingFeeling = false;
 
-// Load JSON data
+// Load data from JSON
 async function loadData() {
   try {
     const response = await fetch('vedic_data.json');
@@ -13,9 +13,12 @@ async function loadData() {
 
   document.getElementById('userInput').disabled = false;
   document.getElementById('sendBtn').disabled = false;
+
+  // Show main buttons on first load
+  addMainButtons();
 }
 
-// Add message in chat
+// Add a message to chat
 function addMessage(msg, sender) {
   const messages = document.getElementById('messages');
   const div = document.createElement('div');
@@ -25,39 +28,49 @@ function addMessage(msg, sender) {
   messages.scrollTop = messages.scrollHeight;
 }
 
-// Add main quick buttons (Timings, Appointment, Doctors)
+// Add the 3 fixed buttons — visible only once at bottom
 function addMainButtons() {
-  const messages = document.getElementById('messages');
-  const existingButtons = messages.querySelectorAll('.main-btn');
-  existingButtons.forEach(btn => btn.remove()); // avoid duplicates
+  const container = document.getElementById('main-buttons-container');
+  if (container) container.remove(); // remove old one
 
-  const options = ["Timings", "Appointment", "Doctors"];
-  options.forEach(option => {
-    const btn = document.createElement('button');
-    btn.className = 'main-btn';
-    btn.innerText = option;
-    btn.onclick = () => handleUserInput(option);
-    messages.appendChild(btn);
+  const messages = document.getElementById('messages');
+  const wrapper = document.createElement('div');
+  wrapper.id = 'main-buttons-container';
+
+  const buttons = [
+    { label: "Timings", value: "timings" },
+    { label: "Appointment", value: "appointment" },
+    { label: "Doctors", value: "doctors" }
+  ];
+
+  buttons.forEach(btn => {
+    const b = document.createElement('button');
+    b.className = 'main-btn';
+    b.innerText = btn.label;
+    b.onclick = () => handleUserInput(btn.value);
+    wrapper.appendChild(b);
   });
+
+  messages.appendChild(wrapper);
+  messages.scrollTop = messages.scrollHeight;
 }
 
-// Get fuzzy response from data
+// Get fuzzy match response
 function getResponse(input) {
   if (!input) return null;
-  const q = input.toLowerCase();
+  const q = input.toLowerCase().trim();
 
   let matches = [];
 
-  // Check all categories in data
   for (const cat in data) {
     const section = data[cat];
+
     if (typeof section === 'string') {
       if (section.toLowerCase().includes(q)) matches.push(section);
     } else if (typeof section === 'object') {
       for (const key in section) {
         const value = section[key];
 
-        // Direct key match
         if (key.toLowerCase().includes(q)) {
           if (typeof value === 'string') matches.push(value);
           else if (typeof value === 'object') {
@@ -68,7 +81,10 @@ function getResponse(input) {
           }
         }
 
-        // Check inside object values too
+        if (typeof value === 'string' && value.toLowerCase().includes(q)) {
+          matches.push(value);
+        }
+
         if (typeof value === 'object') {
           for (const subKey in value) {
             if (String(value[subKey]).toLowerCase().includes(q)) {
@@ -76,34 +92,28 @@ function getResponse(input) {
             }
           }
         }
-
-        // Match text values
-        if (typeof value === 'string' && value.toLowerCase().includes(q)) {
-          matches.push(value);
-        }
       }
     }
   }
 
-  // Return combined or null
-  if (matches.length > 0) {
-    return [...new Set(matches)].slice(0, 3).join('\n\n');
-  }
-  return null;
+  return matches.length > 0 ? [...new Set(matches)].slice(0, 2).join('\n\n') : null;
 }
 
 // Handle user input
 function handleUserInput(input) {
   addMessage(input, 'user');
 
+  // Remove old main buttons before new reply
+  const oldContainer = document.getElementById('main-buttons-container');
+  if (oldContainer) oldContainer.remove();
+
   if (awaitingFeeling) {
     addMessage("I'm glad to hear that 🌿 How can I help you today?", 'bot');
-    addMainButtons();
     awaitingFeeling = false;
+    addMainButtons();
     return;
   }
 
-  // Greetings
   const greetings = ["hi", "hello", "hey", "namaste", "good morning", "good evening"];
   const byes = ["bye", "goodbye", "see you", "thank you"];
 
@@ -118,30 +128,28 @@ function handleUserInput(input) {
     return;
   }
 
-  // Get response
   const response = getResponse(input);
 
   if (response) {
     addMessage(response, 'bot');
   } else {
-    addMessage("I'm sorry, I couldn’t find that 🌿 Try asking about timings, appointments, or doctors.", 'bot');
+    addMessage("Sorry 🌿 I didn’t quite get that. Try asking about Timings, Appointment, or Doctors.", 'bot');
   }
 
-  // Show main buttons after each reply
+  // Add main buttons back
   addMainButtons();
 }
 
-// Send button
+// Send and Enter key
 document.getElementById('sendBtn').addEventListener('click', () => {
   const input = document.getElementById('userInput').value.trim();
   if (input) handleUserInput(input);
   document.getElementById('userInput').value = '';
 });
 
-// Enter key
 document.getElementById('userInput').addEventListener('keypress', e => {
   if (e.key === 'Enter') document.getElementById('sendBtn').click();
 });
 
-// Load data on startup
+// Load JSON on startup
 loadData();
