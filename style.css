@@ -1,18 +1,10 @@
-/* 🌿 Global Reset */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background: transparent;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
+  background: #f4f7f9;
 }
 
-html, body {
-  background: transparent !important;
-}
-
-/* 💬 Floating Chat Button */
+/* Floating Chat Button */
 #chat-toggle {
   position: fixed;
   bottom: 15px;
@@ -31,33 +23,47 @@ html, body {
   z-index: 1000;
   transition: transform 0.3s ease;
 }
-#chat-toggle:hover {
-  transform: scale(1.1);
+#chat-toggle:hover { transform: scale(1.1); }
+
+/* Assist text beside button */
+#assist-text {
+  position: fixed;
+  bottom: 28px;
+  right: 90px;
+  background: #ffffff;
+  border: 1px solid #3cd3ad;
+  border-radius: 25px;
+  padding: 8px 15px;
+  font-size: 14px;
+  color: #0a513d;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  font-weight: 500;
+  z-index: 1000;
+  transition: opacity 0.3s ease;
 }
 
-/* 🧾 Chatbox Window */
+/* Chatbox */
 #chatbox {
-  width: 360px;
-  height: 480px;
+  width: 320px;
+  height: 450px;
   border-radius: 15px;
-  background: #ffffff;
-  border: none !important;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  position: fixed;
+  bottom: 80px;
+  right: 25px;
+  background: #fff;
   display: none;
   flex-direction: column;
   overflow: hidden;
+  border: 1px solid #ddd;
   z-index: 999;
-  position: fixed;
-  bottom: 75px;
-  right: 25px;
 }
-
 #chatbox.open {
   display: flex;
-  animation: slideUp 0.35s ease-in-out;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-/* 🌈 Header */
+/* Chat Header */
 #chat-header {
   background: linear-gradient(135deg, #00b09b, #3cd3ad);
   color: white;
@@ -67,7 +73,7 @@ html, body {
   font-weight: bold;
 }
 
-/* 💬 Messages Section */
+/* Messages Section */
 #messages {
   flex: 1;
   padding: 15px;
@@ -78,7 +84,7 @@ html, body {
   gap: 10px;
 }
 
-/* 🗨️ Message Bubbles */
+/* Message Bubbles */
 .message {
   max-width: 80%;
   padding: 10px 15px;
@@ -86,41 +92,11 @@ html, body {
   animation: fadeIn 0.3s ease;
   word-wrap: break-word;
 }
+.bot { background-color: #e1f5e1; align-self: flex-start; color: #333; }
+.user { background-color: #00b09b; color: white; align-self: flex-end; }
 
-.bot {
-  background-color: #e1f5e1;
-  align-self: flex-start;
-  color: #333;
-}
-
-.user {
-  background-color: #00b09b;
-  color: white;
-  align-self: flex-end;
-}
-
-/* 🌿 FAQ Buttons */
-.faq-btn {
-  margin: 5px 5px 0 0;
-  padding: 7px 10px;
-  border: none;
-  background-color: #4caf50;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 600;
-}
-.faq-btn:hover {
-  background-color: #43a047;
-}
-
-/* 📝 Input Area */
-#input {
-  display: flex;
-  border-top: 1px solid #ddd;
-  background: #ffffff;
-}
-
+/* Input area */
+#input { display: flex; border-top: 1px solid #ddd; }
 #input input {
   flex: 1;
   padding: 12px;
@@ -128,7 +104,6 @@ html, body {
   outline: none;
   font-size: 14px;
 }
-
 #input button {
   padding: 12px 20px;
   border: none;
@@ -136,50 +111,31 @@ html, body {
   color: white;
   cursor: pointer;
   transition: background-color 0.2s;
-  border-radius: 0 0 15px 0;
 }
-#input button:hover {
-  background-color: #03a678;
+#input button:hover { background-color: #03a678; }
+
+/* Animation */
+@keyframes fadeIn { 
+  from { opacity: 0; transform: translateY(10px); } 
+  to { opacity: 1; transform: translateY(0); } 
 }
 
-/* ✨ Animations */
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 📱 Mobile Responsive */
-@media screen and (max-width: 600px) {
+/* Responsive */
+@media (max-width: 600px) {
   #chatbox {
-    width: 95vw;
-    height: 80dvh; /* dynamically adapts to mobile viewport */
-    bottom: 80px;
-    right: 10px;
-    border-radius: 15px;
+    width: 90vw;
+    height: 70vh;
+    right: 5vw;
+    bottom: 70px;
   }
-
   #chat-toggle {
-    width: 55px;
-    height: 55px;
-    bottom: 15px;
-    right: 15px;
-    font-size: 22px;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+  #assist-text {
+    font-size: 12px;
+    bottom: 20px;
+    right: 70px;
   }
 }
