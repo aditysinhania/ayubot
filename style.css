@@ -1,3 +1,4 @@
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -23,7 +24,9 @@ body {
   z-index: 1000;
   transition: transform 0.3s ease;
 }
-#chat-toggle:hover { transform: scale(1.1); }
+#chat-toggle:hover {
+  transform: scale(1.1);
+}
 
 /* Floating Assist Text */
 #assist-text {
@@ -42,12 +45,12 @@ body {
   transition: opacity 0.3s ease;
 }
 
-/* Chatbox (hidden by default) */
+/* Chatbox */
 #chatbox {
   width: 320px;
   height: 450px;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   position: fixed;
   bottom: 80px;
   right: 25px;
@@ -73,7 +76,7 @@ body {
   font-weight: bold;
 }
 
-/* Messages */
+/* Messages Container */
 #messages {
   flex: 1;
   padding: 15px;
@@ -84,7 +87,7 @@ body {
   gap: 10px;
 }
 
-/* Message bubbles */
+/* Message Bubbles */
 .message {
   max-width: 80%;
   padding: 10px 15px;
@@ -92,11 +95,22 @@ body {
   animation: fadeIn 0.3s ease;
   word-wrap: break-word;
 }
-.bot { background-color: #e1f5e1; align-self: flex-start; color: #333; }
-.user { background-color: #00b09b; color: white; align-self: flex-end; }
+.bot {
+  background-color: #e1f5e1;
+  align-self: flex-start;
+  color: #333;
+}
+.user {
+  background-color: #00b09b;
+  color: white;
+  align-self: flex-end;
+}
 
-/* Input section */
-#input { display: flex; border-top: 1px solid #ddd; }
+/* Input area */
+#input {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
 #input input {
   flex: 1;
   padding: 12px;
@@ -110,15 +124,56 @@ body {
   background-color: #00b09b;
   color: white;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
-#input button:hover { background-color: #03a678; }
+#input button:hover {
+  background-color: #03a678;
+}
 
+/* Fixed Main Buttons (Timings, Appointment, Doctors) */
+#main-buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.main-btn {
+  padding: 6px 12px;
+  border: none;
+  background: linear-gradient(135deg, #00b09b, #3cd3ad);
+  color: white;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.main-btn:hover {
+  background-color: #03a678;
+}
+
+/* Scrollbar customization */
+#messages::-webkit-scrollbar {
+  width: 6px;
+}
+#messages::-webkit-scrollbar-thumb {
+  background-color: #b8e0c8;
+  border-radius: 10px;
+}
+
+/* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Mobile view */
+/* Mobile Responsiveness */
 @media (max-width: 600px) {
   #chatbox {
     width: 90vw;
@@ -136,20 +191,8 @@ body {
     bottom: 20px;
     right: 70px;
   }
-}
-
-/* Persistent buttons (Timings, Appointment, Doctors) */
-.main-btn {
-  margin: 6px 4px 0 0;
-  padding: 6px 12px;
-  border: none;
-  background-color: #00b09b;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 13px;
-  transition: background-color 0.2s;
-}
-.main-btn:hover {
-  background-color: #03a678;
+  #main-buttons-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
