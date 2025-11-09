@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background: #f4f7f9;
+  background: transparent;
 }
 
 /* Floating Chat Button */
@@ -25,10 +25,10 @@ body {
 }
 #chat-toggle:hover { transform: scale(1.1); }
 
-/* Assist text beside button */
+/* Floating Assist Text */
 #assist-text {
   position: fixed;
-  bottom: 28px;
+  bottom: 30px;
   right: 90px;
   background: #ffffff;
   border: 1px solid #3cd3ad;
@@ -42,7 +42,7 @@ body {
   transition: opacity 0.3s ease;
 }
 
-/* Chatbox */
+/* Chatbox (hidden by default) */
 #chatbox {
   width: 320px;
   height: 450px;
@@ -73,7 +73,7 @@ body {
   font-weight: bold;
 }
 
-/* Messages Section */
+/* Messages */
 #messages {
   flex: 1;
   padding: 15px;
@@ -84,7 +84,7 @@ body {
   gap: 10px;
 }
 
-/* Message Bubbles */
+/* Message bubbles */
 .message {
   max-width: 80%;
   padding: 10px 15px;
@@ -95,7 +95,7 @@ body {
 .bot { background-color: #e1f5e1; align-self: flex-start; color: #333; }
 .user { background-color: #00b09b; color: white; align-self: flex-end; }
 
-/* Input area */
+/* Input section */
 #input { display: flex; border-top: 1px solid #ddd; }
 #input input {
   flex: 1;
@@ -110,17 +110,15 @@ body {
   background-color: #00b09b;
   color: white;
   cursor: pointer;
-  transition: background-color 0.2s;
 }
 #input button:hover { background-color: #03a678; }
 
-/* Animation */
-@keyframes fadeIn { 
-  from { opacity: 0; transform: translateY(10px); } 
-  to { opacity: 1; transform: translateY(0); } 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive */
+/* Mobile view */
 @media (max-width: 600px) {
   #chatbox {
     width: 90vw;
