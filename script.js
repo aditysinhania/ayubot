@@ -66,43 +66,81 @@ function addMainButtons() {
   messages.scrollTop = messages.scrollHeight;
 }
 
-// Fuzzy data match
+// Smarter search function
 function getResponse(input) {
   if (!input) return null;
   const q = input.toLowerCase();
   let matches = [];
 
+  // 1️⃣ Check exact top-level match first
+  for (const category in data) {
+    if (category.toLowerCase() === q) {
+      const section = data[category];
+      if (typeof section === 'string') return section;
+      if (typeof section === 'object') {
+        let reply = [];
+        for (const key in section) {
+          const value = section[key];
+          if (typeof value === 'object') {
+            const details = [];
+            for (const subKey in value) {
+              details.push(`${subKey}: ${value[subKey]}`);
+            }
+            reply.push(`${key.replace(/_/g, ' ')} — ${details.join(', ')}`);
+          } else {
+            reply.push(`${key.replace(/_/g, ' ')}: ${value}`);
+          }
+        }
+        return reply.join('\n\n');
+      }
+    }
+  }
+
+  // 2️⃣ Deep search inside all objects and values
   for (const cat in data) {
     const section = data[cat];
-    if (typeof section === 'string' && section.toLowerCase().includes(q))
+    if (typeof section === 'string' && section.toLowerCase().includes(q)) {
       matches.push(section);
-    else if (typeof section === 'object') {
+    } else if (typeof section === 'object') {
       for (const key in section) {
         const value = section[key];
+
+        // Match key
         if (key.toLowerCase().includes(q)) {
           if (typeof value === 'string') matches.push(value);
           else if (typeof value === 'object') {
             let details = [];
-            for (const sub in value)
-              details.push(`${sub}: ${value[sub]}`);
+            for (const subKey in value) {
+              details.push(`${subKey}: ${value[subKey]}`);
+            }
             matches.push(details.join(', '));
           }
         }
-        if (typeof value === 'string' && value.toLowerCase().includes(q))
+
+        // Match inside string values
+        if (typeof value === 'string' && value.toLowerCase().includes(q)) {
           matches.push(value);
+        }
+
+        // Match inside nested object fields (like "timing")
         if (typeof value === 'object') {
-          for (const sub in value)
-            if (String(value[sub]).toLowerCase().includes(q))
-              matches.push(`${key}: ${value[sub]}`);
+          for (const subKey in value) {
+            const subVal = String(value[subKey]).toLowerCase();
+            if (subKey.toLowerCase().includes(q) || subVal.includes(q)) {
+              matches.push(`${key.replace(/_/g, ' ')} — ${subKey}: ${value[subKey]}`);
+            }
+          }
         }
       }
     }
   }
 
-  return matches.length ? [...new Set(matches)].slice(0, 2).join('\n\n') : null;
+  // 3️⃣ Return best results
+  if (matches.length === 0) return null;
+  return [...new Set(matches)].slice(0, 3).join('\n\n');
 }
 
-// Handle input
+// Handle user input
 function handleUserInput(input) {
   addMessage(input, 'user');
   const oldButtons = document.getElementById('main-buttons-container');
@@ -136,7 +174,7 @@ function handleUserInput(input) {
   addMainButtons();
 }
 
-// Send and Enter
+// Send & Enter
 document.getElementById('sendBtn').addEventListener('click', () => {
   const input = document.getElementById('userInput').value.trim();
   if (input) handleUserInput(input);
