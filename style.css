@@ -137,3 +137,19 @@ body {
     right: 70px;
   }
 }
+
+/* Persistent buttons (Timings, Appointment, Doctors) */
+.main-btn {
+  margin: 6px 4px 0 0;
+  padding: 6px 12px;
+  border: none;
+  background-color: #00b09b;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.2s;
+}
+.main-btn:hover {
+  background-color: #03a678;
+}
