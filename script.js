@@ -53,7 +53,7 @@ function addMainButtons() {
   const buttons = [
     { label: "Timings", value: "timings" },
     { label: "Appointment", value: "appointment" },
-    { label: "Doctors", value: "doctors" }
+    { label: "Doctors", value: "doctor" }
   ];
 
   buttons.forEach(btn => {
@@ -68,92 +68,41 @@ function addMainButtons() {
   messages.scrollTop = messages.scrollHeight;
 }
 
-// Enhanced response function
+// ************ UPDATED RESPONSE LOGIC ************
 function getResponse(input) {
   if (!input) return null;
   const q = input.toLowerCase();
-  let matches = [];
 
-  // Handle singular/plural flexibility
-  const normalize = (text) =>
-    text.endsWith('s') ? text.slice(0, -1) : text + 's';
-
-  // 1️⃣ Exact top-level match
-  for (const category in data) {
-    if (
-      category.toLowerCase() === q ||
-      normalize(category.toLowerCase()) === normalize(q)
-    ) {
-      const section = data[category];
-      if (typeof section === 'string') return section;
-      if (typeof section === 'object') {
-        let reply = [];
-        for (const key in section) {
-          const value = section[key];
-          if (typeof value === 'object') {
-            const details = [];
-            for (const subKey in value) {
-              details.push(`${subKey}: ${value[subKey]}`);
-            }
-            reply.push(`${value.name || key.replace(/_/g, ' ')} — ${details.join(', ')}`);
-          } else {
-            reply.push(`${key.replace(/_/g, ' ')}: ${value}`);
-          }
-        }
-        return reply.join('\n\n');
-      }
-    }
+  // Greetings
+  if (data.greetings[q]) {
+    return data.greetings[q];
   }
 
-  // 2️⃣ Search deep inside objects
-  for (const cat in data) {
-    const section = data[cat];
-
-    if (typeof section === 'string' && section.toLowerCase().includes(q))
-      matches.push(section);
-
-    if (typeof section === 'object') {
-      for (const key in section) {
-        const value = section[key];
-        const keyMatch =
-          key.toLowerCase().includes(q) ||
-          normalize(key.toLowerCase()).includes(normalize(q));
-
-        if (keyMatch) {
-          if (typeof value === 'string') matches.push(value);
-          else if (typeof value === 'object') {
-            let details = [];
-            for (const subKey in value) {
-              details.push(`${subKey}: ${value[subKey]}`);
-            }
-            matches.push(details.join(', '));
-          }
-        }
-
-        if (typeof value === 'string' && value.toLowerCase().includes(q))
-          matches.push(value);
-
-        if (typeof value === 'object') {
-          for (const subKey in value) {
-            const subVal = String(value[subKey]).toLowerCase();
-            if (
-              subKey.toLowerCase().includes(q) ||
-              subVal.includes(q) ||
-              normalize(subKey.toLowerCase()).includes(normalize(q))
-            ) {
-              matches.push(
-                `${value.name || key.replace(/_/g, ' ')} — ${subKey}: ${value[subKey]}`
-              );
-            }
-          }
-        }
-      }
-    }
+  // Ayurveda
+  if (q.includes("what is ayurveda") || q.includes("ayurveda")) {
+    return data.general["what is ayurveda"];
   }
 
-  // 3️⃣ Clean response
-  if (matches.length === 0) return null;
-  return [...new Set(matches)].slice(0, 3).join('\n\n');
+  // Doctors (ONLY NAMES)
+  if (q === "doctor" || q === "doctors") {
+    return Object.values(data.doctors)
+      .map(doc => doc.name)
+      .join("\n\n");
+  }
+
+  // Timings (NAME + TIMING)
+  if (q === "timing" || q === "timings") {
+    return Object.values(data.doctors)
+      .map(doc => `${doc.name} — ${doc.timing}`)
+      .join("\n\n");
+  }
+
+  // Appointment
+  if (q.includes("appointment")) {
+    return data.appointment.details;
+  }
+
+  return null;
 }
 
 // Handle user input
@@ -162,6 +111,7 @@ function handleUserInput(input) {
   const oldButtons = document.getElementById('main-buttons-container');
   if (oldButtons) oldButtons.remove();
 
+  // Greetings follow-up
   if (awaitingFeeling) {
     addMessage("I'm glad to hear that 🌿 How can I help you today?", 'bot');
     awaitingFeeling = false;
@@ -169,23 +119,13 @@ function handleUserInput(input) {
     return;
   }
 
-  const greetings = ["hi", "hello", "hey", "namaste"];
-  const byes = ["bye", "goodbye", "see you"];
-
-  if (greetings.includes(input.toLowerCase())) {
-    addMessage("Namaskar! 🌿 How are you feeling today?", 'bot');
-    awaitingFeeling = true;
-    return;
-  }
-
-  if (byes.includes(input.toLowerCase())) {
-    addMessage("Take care 🌿 Stay healthy with Ayurveda!", 'bot');
-    return;
-  }
-
   const res = getResponse(input);
-  if (res) addMessage(res, 'bot');
-  else addMessage("Sorry 🌿 I didn’t quite get that. Try asking about Timings, Appointment, or Doctors.", 'bot');
+
+  if (res) {
+    addMessage(res, 'bot');
+  } else {
+    addMessage("Sorry 🌿 I didn’t get that. Try asking: Timings, Appointment, or Doctors.", 'bot');
+  }
 
   addMainButtons();
 }
