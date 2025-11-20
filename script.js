@@ -1,10 +1,10 @@
 let data = {};
 let awaitingFeeling = false;
 
-// Load JSON data
+// Load JSON
 async function loadData() {
   try {
-    const response = await fetch('vedic_data.json');
+    const response = await fetch('vedic_data.json?v=2');
     data = await response.json();
   } catch (e) {
     console.error('Failed to load vedic_data.json', e);
@@ -68,7 +68,7 @@ function addMainButtons() {
   messages.scrollTop = messages.scrollHeight;
 }
 
-// ************ UPDATED RESPONSE LOGIC ************
+// ************** UPDATED RESPONSE SYSTEM **************
 function getResponse(input) {
   if (!input) return null;
   const q = input.toLowerCase();
@@ -78,19 +78,19 @@ function getResponse(input) {
     return data.greetings[q];
   }
 
-  // Ayurveda
+  // Ayurveda explanation
   if (q.includes("what is ayurveda") || q.includes("ayurveda")) {
     return data.general["what is ayurveda"];
   }
 
-  // Doctors (ONLY NAMES)
+  // Doctors (only names)
   if (q === "doctor" || q === "doctors") {
     return Object.values(data.doctors)
       .map(doc => doc.name)
       .join("\n\n");
   }
 
-  // Timings (NAME + TIMING)
+  // Timings (name + timing)
   if (q === "timing" || q === "timings") {
     return Object.values(data.doctors)
       .map(doc => `${doc.name} — ${doc.timing}`)
@@ -105,17 +105,45 @@ function getResponse(input) {
   return null;
 }
 
-// Handle user input
+// ************** FEELING LOGIC **************
+function handleFeeling(input) {
+  const positive = ["good", "fine", "great", "well", "awesome", "better", "happy"];
+  const negative = ["bad", "not good", "sad", "sick", "not well", "upset", "tired", "weak", "pain"];
+
+  const q = input.toLowerCase();
+
+  if (positive.some(word => q.includes(word))) {
+    return "I'm glad to hear that! 🌿 Wishing you continued wellness. How can I assist you today?";
+  }
+
+  if (negative.some(word => q.includes(word))) {
+    return "I’m sorry you're not feeling well. 🌿 Ayurveda can help restore balance. How can I support you today?";
+  }
+
+  return "Thank you for sharing that 🌿 How can I assist you today?";
+}
+
+// ************** MAIN HANDLER **************
 function handleUserInput(input) {
   addMessage(input, 'user');
+
   const oldButtons = document.getElementById('main-buttons-container');
   if (oldButtons) oldButtons.remove();
 
-  // Greetings follow-up
+  // Feeling response
   if (awaitingFeeling) {
-    addMessage("I'm glad to hear that 🌿 How can I help you today?", 'bot');
+    const reply = handleFeeling(input);
+    addMessage(reply, 'bot');
     awaitingFeeling = false;
     addMainButtons();
+    return;
+  }
+
+  // Detect greetings that ask "How are you?"
+  const greetingWords = ["hi", "hello", "hey", "namaskar", "namaskara", "namaste"];
+  if (greetingWords.includes(input.toLowerCase())) {
+    addMessage("Namaskara! 🌿 How are you feeling today?", 'bot');
+    awaitingFeeling = true;
     return;
   }
 
@@ -130,15 +158,17 @@ function handleUserInput(input) {
   addMainButtons();
 }
 
-// Send / Enter key
+// Send button
 document.getElementById('sendBtn').addEventListener('click', () => {
   const input = document.getElementById('userInput').value.trim();
   if (input) handleUserInput(input);
   document.getElementById('userInput').value = '';
 });
+
+// Enter key
 document.getElementById('userInput').addEventListener('keypress', e => {
   if (e.key === 'Enter') document.getElementById('sendBtn').click();
 });
 
-// Initialize
+// Init
 loadData();
