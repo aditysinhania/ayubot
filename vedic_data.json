@@ -1,97 +1,29 @@
 {
   "general": {
-    "what is ayurveda": "Ayurveda is a 5,000-year-old holistic system from India that focuses on balancing the body, mind, and spirit for natural healing.",
-    "services": "We offer Panchakarma, Herbal Therapy, Diet Consultation, Stress Management, and Detox Programs.",
-    "appointment": "You can book an appointment from our website or call +91-7892141002 or +91-(80)-40944666. Online consultations are also available.",
-    "location": "Our Vedic Chikitsa Centre is located in Bengaluru, India 🌿."
+    "what is ayurveda": "Ayurveda is a 5000-year-old holistic healing system that focuses on balancing the body, mind, and spirit for natural wellness."
   },
-  "medicines": {
-    "ashwagandha": "Ashwagandha helps reduce stress, improve strength, and support immunity. Take 1 capsule twice daily after meals.",
-    "triphala": "Triphala supports digestion, detoxifies the body, and improves immunity. Take 1 teaspoon with warm water before bed.",
-    "chyawanprash": "Chyawanprash boosts energy and immunity. Take 1 tablespoon every morning with milk.",
-    "brahmi": "Brahmi enhances memory, focus, and mental clarity. Take 1 capsule twice daily after food.",
-    "turmeric": "Turmeric reduces inflammation and boosts liver health. Mix half a teaspoon in warm milk daily."
+
+  "greetings": {
+    "hi": "Namaskara! 🌿 How can I assist you today?",
+    "hello": "Namaskara! 🌿 How can I assist you today?",
+    "hey": "Namaskara! 🌿 How can I assist you today?",
+    "namaskar": "Namaskara! 🌿 How can I assist you today?",
+    "namaskara": "Namaskara! 🌿 How can I assist you today?",
+    "namaste": "Namaskara! 🌿 How can I assist you today?"
   },
+
   "doctors": {
     "dr_krishnan": {
       "name": "Dr. Krishnan Narayana Pisharody",
-      "specialization": "Expertise in Neurological, Musculoskeletal, Degenerative, autoimmune, Metabolic and Lifestyle disorders.",
-      "timing": "Monday to Friday - 9 AM to 7 PM"
+      "timing": "Monday to Friday — 9 AM to 7 PM"
     },
     "dr_anjali": {
       "name": "Dr. Anjali Ashok",
-      "specialization": "Resident Medical Officer​",
-      "timing": "Tuesday, Thursday, Saturday - 2 PM to 6 PM"
+      "timing": "Tuesday, Thursday, Saturday — 2 PM to 6 PM"
     }
   },
-  "dosha": {
-    "vata": "To balance Vata dosha: follow a warm, oily diet; sleep early; and avoid cold food and late-night work.",
-    "pitta": "To balance Pitta: avoid spicy and fried foods, stay cool, and practice calming yoga like Shavasana.",
-    "kapha": "To balance Kapha: eat light, warm food, stay active, and avoid daytime naps.",
-    "find dosha": "You can identify your dosha based on your body type, temperament, and lifestyle — we can guide you through a simple dosha quiz!"
-  },
-  "routine": {
-    "morning": "Begin your day with tongue cleaning, oil pulling, and warm water with lemon. Follow with light yoga or meditation.",
-    "evening": "Wind down with gentle stretching, herbal tea, and disconnect from screens at least an hour before bed.",
-    "monsoon": "During monsoon, avoid cold foods, eat light soups, and add ginger, turmeric, and tulsi to your diet to boost immunity.",
-    "summer": "Stay hydrated with coconut water and avoid spicy, oily food. Aloe vera juice and cooling herbs balance Pitta.",
-    "dinacharya": "Dinacharya is the daily routine in Ayurveda — wake up before sunrise, cleanse the body, exercise, eat fresh food, and rest early."
-  },
-  "symptoms": {
-    "sleep": "For insomnia, try warm milk with nutmeg, oil massage on feet before bed, and Brahmi supplements.",
-    "digestion": "Weak digestion? Eat freshly cooked meals, sip warm water, and include Triphala or cumin tea.",
-    "stress": "To reduce stress, practice deep breathing, meditate for 10 minutes daily, and take Ashwagandha or Brahmi.",
-    "anxiety": "Ayurveda suggests Shirodhara therapy, Tulsi tea, and grounding foods to calm anxiety.",
-    "joint pain": "For joint stiffness, try applying warm sesame oil, practice Surya Namaskar, and use herbal remedies like Guggulu.",
-    "skin": "For skin rashes, reduce spicy foods, drink neem-infused water, and apply aloe vera gel daily."
-  },
-  "children": {
-    "kids_health": "For children, Ayurveda suggests warm milk with turmeric, seasonal fruits, and enough sleep to build strong immunity.",
-    "teenagers": "Teenagers should avoid junk food and late nights; balanced meals and yoga help prevent stress.",
-    "elders": "For seniors, light food, regular oil massage, and Brahmi or Triphala help maintain vitality."
-  },
-  "herbs": {
-    "ashwagandha": "Ashwagandha helps reduce stress, improve strength, and support immunity. Take 1 capsule twice daily after meals.",
-    "brahmi": "Brahmi enhances memory, focus, and mental clarity. Take 1 capsule twice daily after food.",
-    "triphala": "Triphala supports digestion and detoxification. Take 1 teaspoon with warm water before bed.",
-    "turmeric": "Turmeric reduces inflammation and boosts liver health. Mix half a teaspoon in warm milk daily.",
-    "chyawanprash": "Chyawanprash boosts energy and immunity. Take 1 tablespoon every morning with milk."
-  },
-  "therapy": {
-    "panchakarma": "Panchakarma is a detox therapy involving Vamana, Virechana, Basti, Nasya, and Raktamokshana. It removes toxins and restores balance.",
-    "abhyanga": "Abhyanga is a warm oil body massage that nourishes tissues and calms the mind.",
-    "shirodhara": "Shirodhara involves pouring warm herbal oil on the forehead — ideal for anxiety and insomnia.",
-    "detox": "Detox therapies help eliminate ama (toxins) and refresh the organs. Recommended once or twice a year."
-  },
-  "safety": {
-    "pregnancy": "Always consult a qualified Ayurvedic doctor before taking herbs during pregnancy 🌸.",
-    "medicine_interaction": "If you're on allopathy medicines, keep a 2–3 hour gap before taking Ayurvedic supplements.",
-    "duration": "Most herbal supplements show results in 2–4 weeks. Long-term use is safe under medical supervision."
-  },
-  "pricing": {
-    "consultation_fees": "Our consultation fees start at ₹500 for an online session and ₹700 for in-clinic visits.",
-    "packages": "We offer Panchakarma, Stress-Relief, and Weight-Management packages at special rates. Contact us for details!",
-    "insurance": "Currently, most Ayurvedic therapies are not covered by insurance, but we provide affordable packages."
-  },
-  "faqs": {
-    "diet": "Ayurveda recommends a Sattvic diet — fresh fruits, vegetables, whole grains, and herbal teas.",
-    "detox": "Detox in Ayurveda can be done through Panchakarma, herbal drinks, and light fasting under medical guidance.",
-    "stress": "To relieve stress, practice meditation, drink Brahmi tea, and get regular Abhyanga (oil massage)."
-  },
-  "followup": {
-    "progress": "That’s great! 🌿 Track your progress by noting your energy, digestion, and sleep weekly.",
-    "detox_repeat": "A mild detox can be done every 3 months; full Panchakarma once a year is ideal.",
-    "next_steps": "Would you like to schedule a review session with one of our Ayurvedic doctors?"
-  },
-  "lifestyle": {
-    "office": "If you sit long hours, stand up every 45 minutes, stretch, and drink warm water to balance Kapha.",
-    "travel": "During travel, carry digestive herbs like Triphala, eat light, and stay hydrated.",
-    "screen_time": "Reduce eye strain by splashing cool water on eyes and using Triphala eyewash weekly."
-  },
-  "contact": {
-    "phone": "+91-7892141002 or +91-(80)-40944666",
-    "email": "info@vedicchikitsa.com",
-    "website": "https://www.vedicchikitsa.com"
-  },
-  "disclaimer": "🩺 This information is for general wellness. For medical concerns, please consult our certified Ayurvedic practitioners."
+
+  "appointment": {
+    "details": "You can book an appointment by calling +91-7892141002 or +91-(80)-40944666."
+  }
 }
